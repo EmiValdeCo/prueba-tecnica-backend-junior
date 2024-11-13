@@ -11,6 +11,9 @@ const app = express();
 // Configuración del puerto
 app.set('port', config.app.port);
 
+// Middleware para interpretar JSON
+app.use(express.json()); 
+
 // Rutas
 app.use('/api/usuarios', users);
 
