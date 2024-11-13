@@ -1,0 +1,18 @@
+{
+  "name": "prueba-tecnica-backend-junior",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon ./src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.18.2",
+    "express-validator": "^7.2.0",
+    "mysql": "^2.18.1",
+    "nodemon": "^3.1.7"
+  }
+}
