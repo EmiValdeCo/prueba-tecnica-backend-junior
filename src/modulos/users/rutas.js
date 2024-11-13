@@ -30,7 +30,7 @@ function validar(req, res, next) {
     // Si hay errores
     if (!errors.isEmpty()) {
         // Respuesta de error
-        return respuestas.error(req, res, 'Error en la validación', 401, errors.array());
+        return respuestas.error(req, res, 'Error, en la validación', 401, errors.array());
     }
     next();
 }
