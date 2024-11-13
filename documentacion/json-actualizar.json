@@ -1,0 +1,11 @@
+{
+    "id_usuario": "1",
+    "nombre_usuario": "Juan Emiliano Valdes",
+    "email_usuario": "juan.perez@gmail.com",
+    "telefono_usuario": "7123-4567",
+    "direccion_usuario": "Avenida Siempre Viva 742",
+    "usuario": "juanp",
+    "fecha_nacimiento": "2006-06-26",
+    "clave_usuario": "claveSegura456",
+    "estado_usuario": "Activo"
+}
