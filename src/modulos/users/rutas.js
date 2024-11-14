@@ -23,6 +23,10 @@ const validarUsuarioActualizar = [
     body('id_usuario').notEmpty().isInt({ min: 1 }).withMessage('El ID debe ser un número entero mayor que cero')
 ];
 
+const validarIdInsert = [
+    body('id_usuario').not().exists().withMessage('El ID no debe ser enviado')
+];
+
 // Middleware de validación y manejo de errores centralizado
 function validar(req, res, next) {
     // Manejo de errores
@@ -38,7 +42,7 @@ function validar(req, res, next) {
 // Rutas 
 router.get('/', obtenerTodos);
 router.get('/uno/:id', obtenerUno);
-router.post('/agregar', validarUsuario, validar, agregar);
+router.post('/agregar', validarIdInsert, validarUsuario, validar, agregar);
 router.put('/actualizar', validarUsuario, validarUsuarioActualizar, actualizar);
 router.delete('/eliminar/:id', eliminar);
 
@@ -96,6 +100,12 @@ async function agregar(req, res, next) {
 //Función de actualizar un usuario
 async function actualizar(req, res, next){
     try {
+        // Verificar si el usuario existe
+        const usuarioExiste = await controlador.uno(req.body.id_usuario);
+        if (usuarioExiste.length === 0) {
+            return respuestas.error(req, res, 'El usuario no existe.', 404);
+        }
+
         req.body.clave_usuario = await encrypt(req.body.clave_usuario);
         await controlador.actualizar(req.body);
         respuestas.success(req, res, 'Se ha actualizado correctamente el usuario', 200);
@@ -112,6 +122,11 @@ async function actualizar(req, res, next){
 //Función de eliminar un usuario
 async function eliminar(req, res, next){
     try {
+        // Verificar si el usuario existe
+        const usuarioExiste = await controlador.uno(req.params.id);
+        if (usuarioExiste.length === 0) {
+            return respuestas.error(req, res, 'El usuario no existe.', 404);
+        }
         await controlador.eliminar(req.params.id);
         respuestas.success(req, res, 'Se ha eliminado correctamente al usuario', 200);
     } catch (error) {

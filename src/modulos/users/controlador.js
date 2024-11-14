@@ -13,7 +13,9 @@ module.exports = function (db) {
     }
     // Funcion de agregar un usuario
     async function agregar(data) {
-        return db.agregar(TABLE_NAME, data);
+        const { nombre_usuario, email_usuario, telefono_usuario, direccion_usuario, usuario, fecha_nacimiento, clave_usuario, estado_usuario } = data;
+        const body = { nombre_usuario, email_usuario, telefono_usuario, direccion_usuario, usuario, fecha_nacimiento, clave_usuario, estado_usuario };
+        return db.agregar(TABLE_NAME, body);
     }
     // Funcion de actualizar un usuario
     async function actualizar(data) {
@@ -27,7 +29,7 @@ module.exports = function (db) {
     // Retornar las funciones
     return {
         todos,
-        uno, 
+        uno,
         agregar,
         actualizar,
         eliminar,
